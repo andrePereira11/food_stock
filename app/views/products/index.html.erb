@@ -19,6 +19,7 @@
                   <th>Validate Date</th>
                   <th>Price</th>
                   <th>Weight</th>
+                  <th>Status</th>
                   <th>Actions</th>      
                 </tr>
               </thead>
@@ -29,9 +30,10 @@
                   <td class="mdl-data-table__cell"><%= product.name %></td>
                   <td class="mdc-data-table__cell"><%= product.code %></td>
                   <td class="mdc-data-table__cell"><%= product.quantity %></td>
-                  <td class="mdc-data-table__cell"><%= product.validate_date %></td>
+                  <td class="mdc-data-table__cell"><%= product.validate_date.strftime("%d/%m/%Y") %></td>
                   <td class="mdc-data-table__cell"><%= product.price %></td>
                   <td class="mdc-data-table__cell"><%= product.weight %></td>
+                  <td class="mdc-data-table__cell"><%= product.status %></td>
                   <td class="mdc-data-table__cell">
                     <%= link_to product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' do%>
                       <i class="material-icons">visibility</i>

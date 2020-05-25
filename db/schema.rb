@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_191906) do
+ActiveRecord::Schema.define(version: 2020_05_22_135154) do
 
   create_table "product_types", force: :cascade do |t|
     t.string "name"
@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 2020_05_13_191906) do
     t.string "code"
     t.date "validate_date"
     t.integer "quantity"
-    t.string "status"
     t.float "price"
     t.float "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "brand"
     t.integer "product_type_id"
+    t.integer "status"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
   end
 

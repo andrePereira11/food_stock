@@ -11,6 +11,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+
+    if is_usual(@product)
+      @product.status = :usual
+    else
+      @product.status = :expiring
+    end
     
     if @product.save
       redirect_to @product
@@ -33,6 +39,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if @product.update(product_params)
+      is_usual(@product) ? @product.usual! : @product.expiring!     #Precisa atualizar o status depois de dar update
       redirect_to @product
     else
       #flash.now[:alert] = 'Nāo foi possível editar o produto'
@@ -49,5 +56,9 @@ class ProductsController < ApplicationController
   private
     def product_params
       params.require(:product).permit(:name, :code, :quantity, :validate_date, :price, :weight, :product_type_id, :brand) 
-    end 
+    end
+    
+    def is_usual(product)
+      product.validate_date > DateTime.now + 30 ? true : false      #Verifica se a data de validade é superior a 1 mes a partir de hoje
+    end
 end
