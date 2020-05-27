@@ -1,3 +1,5 @@
+<%= render 'partialDashboard' %>
+
 <div class="mdl-grid mdl-cell--10-col">
 
   <%= form_for @product do |f| %>
@@ -27,7 +29,7 @@
 
     <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
       <%= f.label :validate_date, 'Validate Date', :class => "mdl-textfield__label" %>
-      <%= f.date_field :validate_date, class: "mdl-textfield__input"%>
+      <%= f.date_field :validate_date, min: Date.today, class: "mdl-textfield__input"%>
       <span class="mdl-textfield__error"></span>
     </div>
 
@@ -55,3 +57,6 @@
   <% end %>
 
 </div>
+
+
+<%= render 'finalPartialDashboard' %>

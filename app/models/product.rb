@@ -6,10 +6,14 @@ class Product < ApplicationRecord
   enum status: {expired:0, expiring:1, usual:2}
 
   #validations
-  #validates :start_date,
-  #date: { after: Proc.new { Date.today }, message: 'must be after today' },
-  #on: :create
 
-
-  #validates_date_of :validate_date, after: Proc.new { Time.now }
+  #Methods
+  def self.search(search)
+    if search
+      where(["name LIKE ?", "%#{search}%"])
+    else
+      all
+    end
+  end
+  
 end

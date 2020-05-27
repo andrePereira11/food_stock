@@ -1,13 +1,33 @@
-
-
+<%= render 'partialDashboard' %>
       
         <div class="mdl-grid demo-content">
-          <div class="demo-charts mdl-cell mdl-cell--12-col">
-            <h2>Products</h2>           
-            <%= link_to new_product_path, id:"link_new_product" ,:class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored' do%><i class="material-icons">add</i><% end %>
+          <h2>Products</h2> 
+          <div class="mdl-layout__header-row demo-charts mdl-cell mdl-cell--12-col">          
+            <%= link_to new_product_path, id:"link_new_product" ,class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect' do%><i class="material-icons">add</i><% end %>
+            
+            <div class="mdl-layout-spacer"></div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+              <label class="mdl-button mdl-js-button mdl-button--fab mdl-button--primary mdl-js-ripple-effect" for="search">
+                <i class="material-icons">search</i>
+              </label>
+              <div class="mdl-textfield__expandable-holder">
+                <%= form_tag products_path, method: "get" do %>
+                  <%= text_field_tag :search, params[:search],class:"mdl-textfield__input space", placeholder: "Search for" %>
+                <% end %>
+              </div>
+            </div>
           </div>
+          
         </div>
-        
+        <!-- Modo com o campo normal do search -->
+        <!--
+        <%= form_tag products_path, method: "get" do %>
+          <%= label_tag(:search, "Search for:") %>
+          <%= text_field_tag(:search, params[:search]) %>
+          <%= submit_tag "", class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--colored'%>
+        <% end %>
+        -->
         <div class="mdl-grid demo-content">
           <div class="demo-charts mdl-cell mdl-cell--12-col">
             <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-data-table--selectable mdl-shadow--2dp">
@@ -26,26 +46,26 @@
               <tbody>
           
                 <% @products.each do |product| %>
-                <tr class="mdc-data-table__row responsive-table">
-                  <td class="mdl-data-table__cell"><%= product.name %></td>
-                  <td class="mdc-data-table__cell"><%= product.code %></td>
-                  <td class="mdc-data-table__cell"><%= product.quantity %></td>
-                  <td class="mdc-data-table__cell"><%= product.validate_date.strftime("%d/%m/%Y") %></td>
-                  <td class="mdc-data-table__cell"><%= product.price %></td>
-                  <td class="mdc-data-table__cell"><%= product.weight %></td>
-                  <td class="mdc-data-table__cell"><%= product.status %></td>
-                  <td class="mdc-data-table__cell">
-                    <%= link_to product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' do%>
-                      <i class="material-icons">visibility</i>
-                    <% end %>
-                    <%= link_to edit_product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' do%>
-                      <i class="material-icons">edit</i>
-                    <% end %>
-                    <%= link_to product_path(product), method: :delete, data: { confirm: 'Do you reaaly wish destroy this product?' }, :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' do%>
-                      <i class="material-icons">delete</i>
-                    <% end %>
-                  </td>
-                </tr>
+                  <tr class="mdc-data-table__row responsive-table">
+                    <td class="mdl-data-table__cell"><%= product.name %></td>
+                    <td class="mdc-data-table__cell"><%= product.code %></td>
+                    <td class="mdc-data-table__cell"><%= product.quantity %></td>
+                    <td class="mdc-data-table__cell"><%= product.validate_date.strftime("%d/%m/%Y") %></td>
+                    <td class="mdc-data-table__cell"><%= product.price %></td>
+                    <td class="mdc-data-table__cell"><%= product.weight %></td>
+                    <td class="mdc-data-table__cell"><%= product.status %></td>
+                    <td class="mdc-data-table__cell">
+                      <%= link_to product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
+                        <i class="material-icons">visibility</i>
+                      <% end %>
+                      <%= link_to edit_product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
+                        <i class="material-icons">edit</i>
+                      <% end %>
+                      <%= link_to product_path(product), method: :delete, data: { confirm: 'Do you reaaly wish destroy this product?' }, :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
 
               </tbody>
@@ -53,3 +73,4 @@
           </div>
         </div>
 
+<%= render 'finalPartialDashboard' %>

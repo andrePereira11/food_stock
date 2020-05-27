@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.search(params[:search])
     @product_types = ProductType.all
   end
 
@@ -13,9 +13,9 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if is_usual(@product)
-      @product.status = :usual
+      @product.usual!             # OU @product.status = :usual
     else
-      @product.status = :expiring
+      @product.expiring!          # OU @product.status = :expiring
     end
     
     if @product.save
