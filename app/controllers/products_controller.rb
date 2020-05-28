@@ -12,16 +12,17 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    if is_usual(@product)
-      @product.usual!             # OU @product.status = :usual
-    else
-      @product.expiring!          # OU @product.status = :expiring
+    if @product.validate_date
+      is_usual(@product) ? @product.usual! : @product.expiring!
+      # OU @product.status = :usual
     end
     
     if @product.save
+      flash[:notice] = 'Cadastrado com sucesso!'
       redirect_to @product
     else
-      #flash.now[:alert] = 'Nāo foi possível salvar o produto'
+      #flash[:alert] = 'Nāo foi possível salvar o produto'
+      @product_types = ProductType.all
       render :new
     end
   end
@@ -40,10 +41,11 @@ class ProductsController < ApplicationController
 
     if @product.update(product_params)
       is_usual(@product) ? @product.usual! : @product.expiring!     #Precisa atualizar o status depois de dar update
-      redirect_to @product
+      redirect_to @product, notice: 'Atualizado com sucesso!'
     else
-      #flash.now[:alert] = 'Nāo foi possível editar o produto'
-      render :update
+      #flash[:notice] = 'Nāo foi possível editar o produto'
+      @product_types = ProductType.all
+      render :edit
     end
   end
 

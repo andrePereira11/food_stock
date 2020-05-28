@@ -1,0 +1,72 @@
+
+
+<div class="mdl-grid mdl-cell--10-col">
+
+  <div id="field_with_errors">
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @product.errors.full_messages.each do |message| %>
+            <li> <%= message %> </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <!--<p id="notice"><%= notice %></p>-->
+
+  <%= form_for @product do |f| %>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :name, 'Name', :class => "mdl-textfield__label" %>
+      <%= f.text_field :name, :class => "mdl-textfield__input", :pattern => '[A-Z,a-z, ]*'%>
+      <span class="mdl-textfield__error">This field accepts only letters</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :quantity, 'Quantity', :class => "mdl-textfield__label" %>
+      <%= f.text_field :quantity, :class => "mdl-textfield__input", :pattern => "[0-9]*"%>
+      <span class="mdl-textfield__error">This field accepts only numbers</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :code, 'Code', :class => "mdl-textfield__label" %>
+      <%= f.text_field :code, :class => "mdl-textfield__input"%>
+      <span class="mdl-textfield__error"></span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :product_type_id, 'Type', class: 'mdl-textfield__label' %>
+      <%= f.collection_select :product_type_id, @product_types, :id, :name, class: 'mdl-textfield__input' %>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :validate_date, 'Validate Date', :class => "mdl-textfield__label" %>
+      <%= f.date_field :validate_date, min: Date.today, class: "mdl-textfield__input"%>
+      <span class="mdl-textfield__error"></span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :price, 'Price', :class => "mdl-textfield__label" %>
+      <%= f.text_field :price, :class => "mdl-textfield__input", :pattern => "-?[0-9]*(\.[0-9]+)?"%>
+      <span class="mdl-textfield__error">This field accepts only numbers</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :weight, 'Weight', :class => "mdl-textfield__label" %>
+      <%= f.text_field :weight, :class => "mdl-textfield__input", :pattern => "-?[0-9]*(\.[0-9]+)?"%>
+      <span class="mdl-textfield__error">This field accepts only numbers</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-cell-8-col mdl-textfield--floating-label">
+      <%= f.label :brand, 'Brand', :class => "mdl-textfield__label" %>
+      <%= f.text_field :brand, :class => "mdl-textfield__input"%>
+      <span class="mdl-textfield__error"></span>
+    </div>
+
+    <br>
+
+    <%= f.submit 'Add',:class => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' %>
+  <% end %>
+</div>
