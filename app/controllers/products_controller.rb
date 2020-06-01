@@ -11,13 +11,9 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
-    if @product.validate_date
-      is_usual(@product) ? @product.usual! : @product.expiring!
-      # OU @product.status = :usual
-    end
     
     if @product.save
+      is_usual(@product) ? @product.usual! : @product.expiring!
       flash[:notice] = 'Cadastrado com sucesso!'
       redirect_to @product
     else
@@ -46,6 +42,15 @@ class ProductsController < ApplicationController
       #flash[:notice] = 'Nāo foi possível editar o produto'
       @product_types = ProductType.all
       render :edit
+    end
+  end
+
+  def destroying
+    @product = Product.find(params[:id])
+
+    #Fazer responder em js para renderizar um modal
+    respond_to do |format|
+      format.js
     end
   end
 

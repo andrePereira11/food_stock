@@ -1,0 +1,44 @@
+
+  <h4 class="mdl-dialog__title">Delete</h4>
+  <div class="mdl-dialog__content"> 
+      <% if @product.quantity > 1 %>
+        <p>O item tem <%= @product.quantity %> unidades, gostaria de deletar todos deste produto?
+        Caso apenas queira se desfazer de um item, clique em edit para mudar a quantidade deste produto.</p>
+      <% else %>
+        <p>Tem certeza que deseja deletar este item?</p>
+      <% end %>
+      
+    
+
+    <div class="mdl-card mdl-cell mdl-cell--12-col">
+
+        <h4 class="mdl-cell mdl-cell--12-col"><%= @product.name %></h4>
+        <div class="mdl-card__supporting-text">
+          Details<br><br>
+          Code: <%= @product.code %><br>
+          Quantity: <%= @product.quantity %><br>
+          Validate Date: <%= @product.validate_date %><br>
+          Price: R$ <%= @product.price %><br>
+          Weight: <%= @product.weight %>(g)<br>
+          Brand: <%= @product.brand %><br>
+          Status: <%= @product.status %><br>
+        </div>
+
+      <br>
+      <div class="mdl-card__actions mdl-card--border">
+        <%= link_to edit_product_path(@product), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" do%>
+          Edit
+        <% end %>
+        <%= link_to product_path(@product), method: :delete, class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" do%>
+          Delete
+        <% end %>
+      </div>
+    </div>
+
+  <!-- Final do dialog content -->
+  </div>
+  <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+
+    <button onclick="myFunction()" type="button" class="mdl-button">Cancel</button>
+  </div>
+

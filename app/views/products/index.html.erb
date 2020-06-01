@@ -61,10 +61,9 @@
                       <%= link_to edit_product_path(product), :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
                         <i class="material-icons">edit</i>
                       <% end %>
-                      <%= link_to product_path(product), method: :delete, data: { confirm: 'Do you reaaly wish destroy this product?' }, :class => 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
+                      <%= link_to destroying_path(product), remote: true, class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect' do%>
                         <i class="material-icons">delete</i>
                       <% end %>
-                      <a href="#my_modal" class="btn waves-effect waves-light modal-trigger">M</a>
                     </td>
                   </tr>
                 <% end %>
@@ -74,15 +73,8 @@
           </div>
         </div>
 
+        <dialog id="demo" class="my_modal mdl-dialog "></dialog>
 
-        <div id="my_modal" class="modal">
-          <div class="modal-content">
-            <h4>Teste</h4>
-            <p>Lorem, ipsum dolor sit asdfasdfasdfasdfasdfasdf</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="modal-close waves-effect btn-flar waves-light">Cancel</a>
-          </div>
-        </div>
 
 <%= render 'finalPartialDashboard' %>
+

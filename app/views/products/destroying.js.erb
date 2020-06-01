@@ -1,0 +1,4 @@
+var my_dialog = document.querySelector('dialog.my_modal');
+$('.my_modal').html("<%= j render 'show' %>");
+//dialogPolyfill.registerDialog(my_dialog);
+my_dialog.showModal();        //o showModal() é diferente de $('.my_modal').show(); Ele faz com que trave todas as ações por tras do modal, até que cancele o modal

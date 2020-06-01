@@ -10,9 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
-//= require jquery_ujs
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery3
+//= require jquery_ujs
 //= require_tree .
+
+//Para importar outro arquivo js é so fazer que nem a linha abaixo, mas com o = depois das duas barras
+// require nome_arquivo.js
+
+//Fechar o botão do modal que abre ao deletar um item (Button Cancel)
+function myFunction() {
+  document.getElementById("demo").close();
+}

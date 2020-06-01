@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   #validations
   validates :name, presence: true
   validates :validate_date, presence: true
-  validates :code, uniqueness: { case_sensitive: false }, presence: true    #normalmente é apenas true, mas {case_sensitive} fara com que não possa ter code A2 e a2
+  validates :code, uniqueness: true, presence: true    #{ case_sensitive: false } fara com que não possa ter code A2 e a2
   validates :price, numericality: true
   validates :weight, numericality: true
   validates :quantity, numericality: { only_integer: true }
@@ -28,7 +28,7 @@ class Product < ApplicationRecord
   #Método que valida se a data de validade é inferior a data de cadastro
   def expiration_date_cannot_be_in_the_past
     if validate_date.present? && validate_date < Date.today
-      errors.add(:expiration_date, "can't be in the past")
+      errors.add(:validate_date, "can't be in the past")
     end
   end
 
