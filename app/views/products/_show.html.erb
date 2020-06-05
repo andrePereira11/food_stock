@@ -17,7 +17,7 @@
           Details<br><br>
           Code: <%= @product.code %><br>
           Quantity: <%= @product.quantity %><br>
-          Validate Date: <%= @product.validate_date %><br>
+          Validate Date: <%= @product.validate_date.strftime("%d/%m/%Y") %><br>
           Price: R$ <%= @product.price %><br>
           Weight: <%= @product.weight %>(g)<br>
           Brand: <%= @product.brand %><br>

@@ -27,7 +27,7 @@ feature "create product" do
 
   scenario "empty fields" do
     product_type = ProductType.create(name:'Carbohydrates', description:'The main sources of carbohydrate are: rice, bread, potatoes, pasta, cassava, cereals, etc.')
-    product = Product.create(name:'Macarrão',code:'A3',quantity: 3, validate_date:'2020-10-18', price:17.30, weight: 300,product_type: product_type.id)
+    product = Product.create(name:'Macarrão',code:'A3',quantity: 3, validate_date:'2020-10-18', price:17.30, weight: 300,product_type_id: product_type.id)
 
     visit root_path
     click_link 'link_new_product'
@@ -40,13 +40,31 @@ feature "create product" do
     fill_in 'Weight', with: ''
     click_on 'Add'
 
-    expect(page).to have_content('Preencha os campos obrigatórios')
+    #expect(page).to have_content('Preencha os campos obrigatórios')
     expect(page).not_to have_content(product.name)
+    expect(page).to have_content('Name can\'t be blank')
+    expect(page).to have_content('Code can\'t be blank')
+    expect(page).to have_content('Validate date can\'t be blank')
+    
   end
 
   scenario "can\'t be duplicate code" do
+    product_type = ProductType.create(name:'Carbohydrates', description:'The main sources of carbohydrate are: rice, bread, potatoes, pasta, cassava, cereals, etc.')
+    product = Product.create(name:'Macarrão',code:'A3',quantity: 3, validate_date:'2020-10-18', price:17.30, weight: 300,product_type_id: product_type.id)
+
+    visit root_path
+    click_link 'link_new_product'
+
+    fill_in 'Name', with: product.name
+    fill_in 'Code', with: 'A3'
+    select product_type.name, from: 'Type'
+    fill_in 'Validate Date', with: '2020/10/15'
+    fill_in 'Price', with: 17.40
+    fill_in 'Weight', with: 15000
+    click_on 'Add'
+
+    expect(page).to have_content('Code has already been taken')
   end
 
-  scenario "system generate code" do
-  end
+  
 end

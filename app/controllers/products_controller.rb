@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     
     if @product.save
       is_usual(@product) ? @product.usual! : @product.expiring!
-      flash[:notice] = 'Cadastrado com sucesso!'
+      flash[:notice] = 'Cadastrado com sucesso!'
       redirect_to @product
     else
       #flash[:alert] = 'Nāo foi possível salvar o produto'
